@@ -1,5 +1,4 @@
-﻿
-use master;
+﻿use master;
 go
 drop database if exists tcgapp;
 go
@@ -42,8 +41,13 @@ sifra int not null primary key identity (1,1),
 naziv varchar(50) not null,
 kolekcija int not null,
 brojslicice int,
-rijetkost varchar(10),
+rijetkost int,
 posebnoizdanje bit
+);
+
+create table rijetkosti(
+sifra int not null primary key identity (1,1),
+naziv varchar(50) not null,
 );
 
 
@@ -51,6 +55,7 @@ alter table korisnici_igre add foreign key (korisnik) references korisnici(sifra
 alter table korisnici_igre add foreign key (igra) references igre(sifra);
 alter table kolekcije add foreign key (igra) references igre(sifra);
 alter table slicice add foreign key (kolekcija) references kolekcije(sifra);
+alter table slicice add foreign key (rijetkost) references rijetkosti(sifra);
 
 
 -- Testiranje insert funkcije
@@ -94,38 +99,41 @@ insert into kolekcije (naziv, godinaizdavanja, igra) values ('EX-02', '2022', 1)
 
 insert into korisnici_igre (korisnik, igra) values (1,1);
 
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('MetalGarurumon', 1, 21, 'super rare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gigimon', 2, 1, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gigimon', 2, 1, 'uncommon', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Xiaomon', 2, 2, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Viximon', 2, 3, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Viximon', 2, 3, 'uncommon', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gummymon', 2, 4, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gummymon', 2, 4, 'uncommon', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Hopmon', 2, 5, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Yaamon', 2, 6, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Yaamon', 2, 6, 'uncommon', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Mother D-Reaper', 2, 7, 'rare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Guilmon', 2, 8, 'rare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Guilmon', 2, 8, 'rare', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Growlmon', 2, 9, 'common', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('WarGrowlmon', 2, 10, 'uncommon', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gallantmon', 2, 11, 'superrare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gallantmon', 2, 11, 'superrare', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Megidramon', 2, 12, 'superrare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Megidramon', 2, 12, 'superrare', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Labramon', 2, 13, 'common', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('IceDevimon', 2, 14, 'common', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Seasarmon', 2, 15, 'common', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gorillamon', 2, 16, 'common', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Leomon', 2, 17, 'superrare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Leomon', 2, 17, 'superrare', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('MarineAngemon', 2, 18, 'rare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('MarineAngemon', 2, 18, 'rare', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Renamon', 2, 19, 'rare', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Renamon', 2, 19, 'rare', 1);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Lopmon', 2, 20, 'common', 0);
-insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Kyubimon', 2, 21, 'common', 0);
+insert into rijetkosti (naziv)
+values ('common'), ('uncommon'), ('rare'), ('superrare'), ('secretrare');
+
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('MetalGarurumon', 1, 21, 4, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gigimon', 2, 1, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gigimon', 2, 1, 2, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Xiaomon', 2, 2, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Viximon', 2, 3, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Viximon', 2, 3, 2, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gummymon', 2, 4, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gummymon', 2, 4, 2, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Hopmon', 2, 5, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Yaamon', 2, 6, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Yaamon', 2, 6, 2, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Mother D-Reaper', 2, 7, 3, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Guilmon', 2, 8, 3, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Guilmon', 2, 8, 3, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Growlmon', 2, 9, 1, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('WarGrowlmon', 2, 10, 2, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gallantmon', 2, 11, 4, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gallantmon', 2, 11, 4, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Megidramon', 2, 12, 4, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Megidramon', 2, 12, 4, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Labramon', 2, 13, 1, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('IceDevimon', 2, 14, 1, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Seasarmon', 2, 15, 1, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Gorillamon', 2, 16, 1, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Leomon', 2, 17, 4, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Leomon', 2, 17, 4, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('MarineAngemon', 2, 18, 3, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('MarineAngemon', 2, 18, 3, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Renamon', 2, 19, 3, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Renamon', 2, 19, 3, 1);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Lopmon', 2, 20, 1, 0);
+insert into slicice (naziv, kolekcija, brojslicice, rijetkost, posebnoizdanje) values ('Kyubimon', 2, 21, 1, 0);
 
 
 
