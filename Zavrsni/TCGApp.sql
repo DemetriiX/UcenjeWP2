@@ -102,9 +102,54 @@ values ('Digimon Card Game', 'Bandai Namco');
 
 insert into kolekcije (naziv, godinaizdavanja, igra) 
 values ('EX-01', '2022', 1);
-
 insert into kolekcije (naziv, godinaizdavanja, igra) 
 values ('EX-02', '2022', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('EX-03', '2022', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('EX-04', '2023', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('EX-05', '2024', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('EX-06', '2024', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-01', '2020', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-02', '2020', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-03', '2020', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-04', '2021', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-05', '2021', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-06', '2021', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-07', '2022', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-08', '2022', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-9', '2022', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-10', '2022', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-11', '2023', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-12', '2023', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-13', '2023', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-14', '2023', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-15', '2024', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT-16', '2024', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT01-03-1.0', '2021', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BT01-03-1.5', '2021', 1);
+insert into kolekcije (naziv, godinaizdavanja, igra) 
+values ('BTC-01', '2022', 1);
 
 insert into korisnici_igre (korisnik, igra) 
 values (1,1), (2,1), (3,1), (4,1), (5,1), (6,1), (7,1), (8,1), (9,1), (10,1), (11,1), (12,1), (13,1), (14,1), (15,1),
