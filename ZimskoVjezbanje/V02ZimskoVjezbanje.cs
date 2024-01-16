@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace WebAPI.Controllers
 {
@@ -175,5 +176,65 @@ namespace WebAPI.Controllers
 
             return Ok(multiplicationTable);
         }
+                
+        [HttpGet]
+        [Route("CiklicnaMatrica")]           
+        public ActionResult<string> GenerateCyclicMatrix(int rows, int columns)
+        {
+             int[,] matrix = CreateCyclicMatrix(rows, columns);
+
+             StringBuilder sb = new StringBuilder();
+
+             for (int i = 0; i < rows; i++)
+             {
+                 for (int j = 0; j < columns; j++)
+                 {
+                     sb.Append(matrix[i, j]);
+                     if (j < columns - 1)
+                         sb.Append(", ");
+                 }
+                 sb.AppendLine();
+             }
+
+             return Ok(sb.ToString());
+        }
+
+        private int[,] CreateCyclicMatrix(int rows, int columns)
+        {
+            int[,] matrix = new int[rows, columns];
+            int value = 1;
+
+            for (int layer = 0; layer < rows / 2; layer++)
+            {
+                for (int i = columns - layer - 1; i >= layer; i--)
+                {
+                    matrix[rows - layer - 1, i] = value++;
+                }
+
+                for (int i = rows - layer - 2; i >= layer; i--)
+                {
+                    matrix[i, layer] = value++;
+                }
+
+                for (int i = layer + 1; i < columns - layer - 1; i++)
+                {
+                    matrix[layer, i] = value++;
+                }
+
+                for (int i = layer; i < rows - layer - 1; i++)
+                {
+                    matrix[i, columns - layer - 1] = value++;
+                }
+            }
+
+            // Stavio da ne bude problem sa neparnim vrijednostima redova i stupaca
+            if (rows % 2 == 1 && columns % 2 == 1)
+            {
+                matrix[rows / 2, columns / 2] = value;
+            }
+
+            return matrix;
+        }
+        
     }
 }
